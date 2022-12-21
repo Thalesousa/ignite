@@ -1,17 +1,17 @@
 import { createContext, useContext, useState } from 'react'
 import {
-  CyclesContextType,
-  CreateCycleData,
-  Cycle,
-  CyclesContextProviderProps,
-} from './interface'
+  ICreateCycleData,
+  ICycle,
+  ICyclesContextProviderProps,
+  ICyclesContextType,
+} from '../@interfaces/Cycle'
 
-export const CyclesContext = createContext({} as CyclesContextType)
+export const CyclesContext = createContext({} as ICyclesContextType)
 
 export function CyclesContextProvider({
   children,
-}: CyclesContextProviderProps) {
-  const [cycles, setCycles] = useState<Cycle[]>([])
+}: ICyclesContextProviderProps) {
+  const [cycles, setCycles] = useState<ICycle[]>([])
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
 
@@ -33,10 +33,10 @@ export function CyclesContextProvider({
     )
   }
 
-  function createNewCycle(data: CreateCycleData) {
+  function createNewCycle(data: ICreateCycleData) {
     const id = String(new Date().getTime())
 
-    const newCycle: Cycle = {
+    const newCycle: ICycle = {
       id,
       task: data.task,
       minutesAmount: data.minutesAmount,
