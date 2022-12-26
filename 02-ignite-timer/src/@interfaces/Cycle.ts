@@ -9,6 +9,11 @@ export interface ICycle {
   finishedDate?: Date
 }
 
+export interface ICyclesState {
+  cycles: ICycle[]
+  activeCycleId: string | null
+}
+
 export interface ICreateCycleData {
   task: string
   minutesAmount: number
