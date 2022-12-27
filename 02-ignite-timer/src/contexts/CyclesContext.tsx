@@ -1,17 +1,20 @@
 import { createContext, useContext, useReducer, useState } from 'react'
-import { CycleReducerActionTypes } from '../@enums/CycleReducerActionTypes'
+
+// reducers
+import { cyclesReducer } from '../reducers/cycles/reducer'
+import {
+  addNewCycleAction,
+  interruptCurrentCycleAction,
+  markCurrentCycleAsFinishedAction,
+} from '../reducers/cycles/actions'
+
+// interfaces
 import {
   ICreateCycleData,
   ICycle,
   ICyclesContextProviderProps,
   ICyclesContextType,
 } from '../@interfaces/Cycle'
-import {
-  addNewCycleAction,
-  interruptCurrentCycleAction,
-  markCurrentCycleAsFinishedAction,
-} from '../reducers/cycles/actions'
-import { cyclesReducer } from '../reducers/cycles/reducer'
 
 export const CyclesContext = createContext({} as ICyclesContextType)
 
