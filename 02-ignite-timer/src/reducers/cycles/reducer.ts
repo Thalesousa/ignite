@@ -1,5 +1,5 @@
-import { CycleReducerActionTypes } from '../@enums/CycleReducerActionTypes'
-import { ICyclesState } from '../@interfaces/Cycle'
+import { CycleReducerActionTypes } from '../../@enums/CycleReducerActionTypes'
+import { ICyclesState } from '../../@interfaces/Cycle'
 
 export function cyclesReducer(state: ICyclesState, action: any) {
   switch (action.type) {
