@@ -16,7 +16,7 @@ export function markCurrentCycleAsFinishedAction() {
   }
 }
 
-export function interruptCurrentCycleAction(activeCycleId: string) {
+export function interruptCurrentCycleAction(activeCycleId: string | null) {
   return {
     type: CycleReducerActionTypes.INTERRUPT_CURRENT_CYCLE,
     payload: {
