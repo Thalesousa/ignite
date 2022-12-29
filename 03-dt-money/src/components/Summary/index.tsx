@@ -1,9 +1,11 @@
 import { useTheme } from "styled-components";
 import { SummaryCard, SummaryContainer } from "./styles";
 import { ArrowCircleUp, ArrowCircleDown, CurrencyDollar } from "phosphor-react";
+import { useTransactionContext } from "../../contexts/TransactionsContext";
 
 export function Summary() {
   const theme = useTheme();
+  const {transactions} = useTransactionContext()
   
   return (
     <SummaryContainer>
