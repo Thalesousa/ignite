@@ -1,11 +1,9 @@
-import { Header } from "../../components/Header";
-import { Summary } from "../../components/Summary";
 import { useTransactionContext } from "../../contexts/TransactionsContext";
 import { priceFormatter, dateFormatter } from "../../utils/formatter";
+import { Summary } from "../../components/Summary";
+import { Header } from "../../components/Header";
 import { SearchForm } from "./components/SearcForm";
 import { TransactionsContainer, TransactionsTable, PriceHighlight } from "./styles";
-
-
 
 export function Transactions() {
   const { transactions } = useTransactionContext()
