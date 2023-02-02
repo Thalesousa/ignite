@@ -1,27 +1,32 @@
-import { GetStaticProps } from "next"
-import Image from "next/image"
-import { useRouter } from "next/router"
+import { GetStaticPaths, GetStaticProps } from "next"
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-import Stripe from "stripe"
-import { stripe } from "../../lib/stripe"
-
+import Stripe from "stripe";
+import { stripe } from "../../lib/stripe";
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
 
 interface IProductProps {
   product: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: string;
-    description: string;
+    id: string
+    name: string
+    imageUrl: string
+    price: string
+    description: string
   }
 }
 
-export default function Product({ product } :IProductProps) {
+export default function Product({ product }: IProductProps) {
+  const { isFallback } = useRouter()
+
+  if (isFallback) {
+    return <p>loading...</p>
+  }
+
   return (
     <ProductContainer>
       <ImageContainer>
-        <Image src={product.imageUrl} width={520} height={400} alt="" />
+        <Image src={product.imageUrl} width={520} height={480} alt="" />
       </ImageContainer>
 
       <ProductDetails>
@@ -36,14 +41,25 @@ export default function Product({ product } :IProductProps) {
   )
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      {
+        params: { id: 'prod_N8k7Wl5RvCDvPX' }
+      }
+    ],
+    fallback: true,
+  }
+}
+
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }) => {
   const productId = params.id;
 
   const product = await stripe.products.retrieve(productId, {
-    expand: ['default.price']
-  })
+    expand: ['default_price']
+  });
 
-  const price = product.default_price as Stripe.Price
+  const price = product.default_price as Stripe.Price;
 
   return {
     props: {
@@ -53,11 +69,11 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         imageUrl: product.images[0],
         price: new Intl.NumberFormat('pt-BR', {
           style: 'currency',
-          currency: 'BRL',
+          currency: 'BRL'
         }).format(price.unit_amount / 100),
-      },
-      description: product.description
+        description: product.description
+      }
     },
-    revalidate: 60 * 60 * 1,
+    revalidate: 60 * 60 * 1 // 1 hours
   }
 }
