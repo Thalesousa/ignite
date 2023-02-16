@@ -1,3 +1,3 @@
-import { colors } from '@ignite-ui-tjsb/tokens';
+import { colors } from '@ignite-ui-tjsb/tokens'
 
-console.log(colors);
+console.log(colors)
